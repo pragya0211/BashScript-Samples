@@ -1,0 +1,18 @@
+top -bn1: runs the top utility in non-interactive mode and with a single iteration, which means it will only gather system information once and then terminate. 
+(top command is a system monitor that shows information about the processes and resource usage on a system.)
+
+grep load: takes the output of top and searches for any lines containing the word "load". 
+The "load" here means system load average (measure of the amount of work a computer system is doing)
+
+awk '{printf "%.2f%%\t\t\n", $(NF-2)}': takes the output from the previous grep command and uses awk to extract and format the system load average value. 
+
+
+
+
+{printf "%.2f%%\t\t\n", $(NF-2)}: prints the second-to-last field ($(NF-2)) of the input line with a format of %.2f%%\t\t\n. 
+The %.2f specifies that the field should be printed as a floating-point number with two decimal places, 
+followed by a percent sign (%) to indicate that this is a percentage value, and then two tabs (\t\t) to format the output.
+output of this is then assigned to the variable cpu. So, cpu will contain a formatted string that represents the current system load average as a percentage, such as 3.57%.
+
+
+this script is useful for diagnosing performance issues or for remote monitoring
