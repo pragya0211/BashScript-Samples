@@ -1,0 +1,28 @@
+free -m: prints out information about the system's memory usage. 
+The -m option: = output should be in megabytes.
+|: pipe
+awk: extract specific piece of information from output of free
+
+
+
+'NR==2{printf "%.2f%%\t\t", $3*100/$2 }': awk command that prints the memory usage as a formatted string.
+
+NR==2: tells awk to only perform the command on the second line of the input. 
+The output of free has two lines of information: the first line shows the total memory, and the second line shows the used memory.
+
+{printf "%.2f%%\t\t", $3*100/$2 }: executed on the second line of the input.
+
+
+printf "%.2f%%\t\t": This is a printf statement that prints out a formatted string. 
+The %.2f specifies that a floating-point number with two decimal places should be printed,
+%% prints out a literal % character. 
+The \t\t prints out two tab characters to separate the output from the next metric.
+$3*100/$2: arithmetic expression that calculates the percentage of memory that is being used. 
+$2 is the total memory, and $3 is the used memory.
+
+
+memory=: assigns the output of the command to a variable called memory. 
+The $(...) = "command substitution", takes the output of the command and assigns it to the variable.
+
+echo "Memory Usage: $memory": prints out the memory usage to the console in a human-readable format. 
+The $memory variable is replaced with the formatted string calculated by the awk command.
