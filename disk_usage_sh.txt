@@ -1,0 +1,16 @@
+disk usage percentage for the root file system ((root of disk))
+
+df -h: display disk space usage information. 
+The -h flag stands for "human-readable", and it tells df to use units such as "G" for gigabytes and "M" for megabytes.
+
+The output df -h is then piped to the awk command, which is used to process text data.
+I've ve written awk command in single quotes.
+
+The pattern '$NF=="/"' is used to match lines in the output of df -h where the last field ($NF) is equal to "/" (the root file system).
+
+'{printf "%s\t\t", $5}' is then executed for each matching line.
+printf is used to print the fifth field ($5) of the matching line (i.e., the percentage of disk usage) and a tab character (\t) is used to format the output.
+
+The output of the awk command is then assigned to the disk variable using command substitution and the syntax $(...), where the ... is the command that outputs the desired value.
+
+So, overall, this command uses df to get the disk usage information and awk to extract the usage percentage for the root file system, which is then stored in the disk variable.
